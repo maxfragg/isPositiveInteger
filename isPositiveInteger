@@ -1,0 +1,29 @@
+#!/bin/bash
+
+# Author:  Max Krüger
+# Version: 0.1
+# Date:    2016-03-26
+# License: Do What The Fuck You Want To Public License (WTFPL) Version 2 or newer
+
+# Exitcode 0 indicates given argument is a positive number
+# Exitcode -1 indicades a negative number
+# Exitcode -2 is giving a type error, since the argument can not be interpreted as integer
+
+function isinteger(){ 
+	return $(test "$@" -eq "$@" > /dev/null 2>&1);
+}
+
+function ispositive(){
+	return $(test "$@" -ge 0 > /dev/null 2>&1);
+}
+
+
+if $(isinteger "$1"); then
+	if $(ispositive "$1"); then 
+		exit 0
+	else
+		exit 1
+	fi
+else
+	exit 2	
+fi
